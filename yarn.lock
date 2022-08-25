@@ -79,6 +79,11 @@
   dependencies:
     "mini-svg-data-uri" "^1.2.3"
 
+"@types/google-spreadsheet@^3.3.0":
+  "integrity" "sha512-5VXD/RvRkeH1dgYvMh1vJfjTUpJwMnfOAAkMcK7IwZmv/jY3qnXrW7Iye74mZ3nXIP8OjGzh4qLc1+TaKdvLfA=="
+  "resolved" "https://registry.npmjs.org/@types/google-spreadsheet/-/google-spreadsheet-3.3.0.tgz"
+  "version" "3.3.0"
+
 "@types/hoist-non-react-statics@^3.3.1":
   "integrity" "sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA=="
   "resolved" "https://registry.npmjs.org/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz"
@@ -433,7 +438,7 @@
   dependencies:
     "node-forge" "^1.3.1"
 
-"google-spreadsheet@^3.0.10":
+"google-spreadsheet@^3.0.10", "google-spreadsheet@^3.3.0":
   "integrity" "sha512-ahmRNh14s1i3phfvbF2mxen1lohWJpUaFWgsU6P6bXu7QrmxMaim1Ys/7BU4W5yucWCzphoIrHMbrbeIR5K9mw=="
   "resolved" "https://registry.npmjs.org/google-spreadsheet/-/google-spreadsheet-3.3.0.tgz"
   "version" "3.3.0"
