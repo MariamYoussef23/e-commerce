@@ -13,6 +13,13 @@ export interface CartItem extends Product {
   quantity: number
 }
 
+export interface Collection {
+  id:number
+  name: string
+  imageSrc: string
+  imageAlt: string
+}
+
 export type Category = {
   name: string
   featured: Product[]
@@ -30,3 +37,4 @@ export type Page = {
 export type Navigation = {
   categories: Category[]
 }
+

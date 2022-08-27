@@ -1,30 +1,34 @@
 import type { NextPage } from 'next'
 import Layout from 'components/layout'
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { useEffect } from 'react'
+import axios from 'axios'
+import { getCollections } from 'redux/collectionsSlice'
 
-const collections = [
-  {
-    name: "Women's",
-    href: '#',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-01.jpg',
-    imageAlt: 'Woman wearing a comfortable cotton t-shirt.',
-  },
-  {
-    name: "Men's",
-    href: '#',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-02.jpg',
-    imageAlt: 'Man wearing a comfortable and casual cotton t-shirt.',
-  },
-  {
-    name: 'Desk Accessories',
-    href: '#',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-03.jpg',
-    imageAlt:
-      'Person sitting at a wooden desk with paper note organizer, pencil and tablet.',
-  },
-]
+// const collections = [
+//   {
+//     name: "Women's",
+//     href: '#',
+//     imageSrc:
+//       'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-01.jpg',
+//     imageAlt: 'Woman wearing a comfortable cotton t-shirt.',
+//   },
+//   {
+//     name: "Men's",
+//     href: '#',
+//     imageSrc:
+//       'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-02.jpg',
+//     imageAlt: 'Man wearing a comfortable and casual cotton t-shirt.',
+//   },
+//   {
+//     name: 'Desk Accessories',
+//     href: '#',
+//     imageSrc:
+//       'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-03.jpg',
+//     imageAlt:
+//       'Person sitting at a wooden desk with paper note organizer, pencil and tablet.',
+//   },
+// ]
 const trendingProducts = [
   {
     id: 1,
@@ -35,7 +39,7 @@ const trendingProducts = [
     imageSrc:
       'https://tailwindui.com/img/ecommerce-images/home-page-04-trending-product-02.jpg',
     imageAlt: 'Hand stitched, orange leather long wallet.',
-  }
+  },
 ]
 const perks = [
   {
@@ -69,6 +73,19 @@ const perks = [
 ]
 
 const Home: NextPage = () => {
+  const collections = useAppSelector((state) => state.collections.collections)
+  const dispatch = useAppDispatch()
+
+  const getCollectionsApi = async () => {
+    const response = await axios.get('http://localhost:3000/api/collections')
+    console.log(response)
+    dispatch(getCollections(response.data.Collections))
+  }
+
+  useEffect(() => {
+    getCollectionsApi()
+  }, [])
+
   return (
     <div className="">
       <Layout>
@@ -159,7 +176,7 @@ const Home: NextPage = () => {
                             Shop the collection
                           </p>
                           <h3 className="mt-1 font-semibold text-white">
-                            <a href={collection.href}>
+                            <a href='#'>
                               <span className="absolute inset-0" />
                               {collection.name}
                             </a>
