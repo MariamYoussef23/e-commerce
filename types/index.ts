@@ -1,21 +1,21 @@
 export interface Product {
-  id: number
+  id?: number
   name: string
   href: string
-  color: string
-  price: number
-  availableQty: number
-  trending: string
+  color?: string
+  price: string
+  availableQty?: number
+  trending?: string
   images: Image[]
 }
 export interface Image {
-  id: number
+  id?: number
   src: string
   alt: string
-  productId: number
+  productId?: number
 }
 export interface CartItem extends Product {
-  quantity: number
+  quantity?: number
 }
 
 export interface Collection {
