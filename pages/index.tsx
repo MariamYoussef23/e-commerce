@@ -88,8 +88,9 @@ const Home: NextPage = () => {
     console.log(response.data)
   }
 
-  const trendingProducts = products.filter((product)=> product.trending === 'TRUE')
-  // console.log(trendingProducts)
+  const trendingProducts = products.filter(
+    (product) => product.trending === 'TRUE'
+  )
 
   useEffect(() => {
     getCollectionsApi()
@@ -186,7 +187,7 @@ const Home: NextPage = () => {
                             Shop the collection
                           </p>
                           <h3 className="mt-1 font-semibold text-white">
-                            <a href='#'>
+                            <a href="#">
                               <span className="absolute inset-0" />
                               {collection.name}
                             </a>
