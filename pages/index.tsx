@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { getCollections } from 'redux/collectionsSlice'
+import { getProducts } from 'redux/productsSlice'
 
 // const collections = [
 //   {
@@ -29,18 +30,18 @@ import { getCollections } from 'redux/collectionsSlice'
 //       'Person sitting at a wooden desk with paper note organizer, pencil and tablet.',
 //   },
 // ]
-const trendingProducts = [
-  {
-    id: 1,
-    name: 'Leather Long Wallet',
-    color: 'Natural',
-    price: '$75',
-    href: '#',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/home-page-04-trending-product-02.jpg',
-    imageAlt: 'Hand stitched, orange leather long wallet.',
-  },
-]
+// const trendingProducts = [
+//   {
+//     id: 1,
+//     name: 'Leather Long Wallet',
+//     color: 'Natural',
+//     price: '$75',
+//     href: '#',
+//     imageSrc:
+//       'https://tailwindui.com/img/ecommerce-images/home-page-04-trending-product-02.jpg',
+//     imageAlt: 'Hand stitched, orange leather long wallet.',
+//   },
+// ]
 const perks = [
   {
     name: 'Free returns',
@@ -74,16 +75,25 @@ const perks = [
 
 const Home: NextPage = () => {
   const collections = useAppSelector((state) => state.collections.collections)
+  const products = useAppSelector((state) => state.products.products)
   const dispatch = useAppDispatch()
 
   const getCollectionsApi = async () => {
     const response = await axios.get('http://localhost:3000/api/collections')
-    console.log(response)
-    dispatch(getCollections(response.data.Collections))
+    dispatch(getCollections(response.data.collections))
   }
+  const getProductsApi = async () => {
+    const response = await axios.get('http://localhost:3000/api/products')
+    dispatch(getProducts(response.data))
+    console.log(response.data)
+  }
+
+  const trendingProducts = products.filter((product)=> product.trending === 'TRUE')
+  // console.log(trendingProducts)
 
   useEffect(() => {
     getCollectionsApi()
+    getProductsApi()
   }, [])
 
   return (
@@ -212,8 +222,8 @@ const Home: NextPage = () => {
                   <div key={product.id} className="group relative">
                     <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
                       <img
-                        src={product.imageSrc}
-                        alt={product.imageAlt}
+                        src={product.images[0].src}
+                        alt={product.images[0].alt}
                         className="h-full w-full object-cover object-center"
                       />
                     </div>

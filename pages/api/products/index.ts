@@ -1,7 +1,8 @@
 import { extractSheets } from 'spreadsheet-to-json'
 import { GoogleSpreadsheet } from 'google-spreadsheet'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Product } from 'types'
+import { AppStateType, Product, Image } from 'types'
+import { getImageSize } from 'next/dist/server/image-optimizer'
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,10 +17,16 @@ export default async function handler(
         {
           spreadsheetKey: process.env.SHEET_ID,
           credentials: credentials,
-          sheetsToExtract: ['Products'],
+          sheetsToExtract: ['products', 'images'],
         },
-        function (err: null, data: Product[]) {
-          return res.status(200).json(data)
+        function (err: null, data: AppStateType) {
+          const products = data.products.map((product: Product) => {
+            const images = data.images.filter(
+              (image: Image) => image.productId === product.id
+            )
+            return { ...product, images }
+          })
+          return res.status(200).json(products)
         }
       )
     } catch (error) {
@@ -34,7 +41,7 @@ export default async function handler(
       })
       await doc.loadInfo()
       const { name, price, description } = req.body
-      const products = doc.sheetsByTitle['Products']
+      const products = doc.sheetsByTitle['products']
       await products.addRow({
         name,
         price,

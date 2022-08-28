@@ -5,10 +5,15 @@ export interface Product {
   color: string
   price: string
   availableQty: number
-  imageSrc: string
-  imageAlt: string
+  trending: string
+  images: Image[]
 }
-
+export interface Image {
+  id: number
+  src: string
+  alt: string
+  productId: number
+}
 export interface CartItem extends Product {
   quantity: number
 }
@@ -28,6 +33,7 @@ export type AppStateType = {
   products: Product[]
   categories: Category[]
   cart: CartItem[]
+  images: Image[]
 }
 
 export type Page = {

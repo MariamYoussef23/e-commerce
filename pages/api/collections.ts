@@ -16,7 +16,7 @@ export default async function handler(
       {
         spreadsheetKey: process.env.SHEET_ID,
         credentials: credentials,
-        sheetsToExtract: ['Collections'],
+        sheetsToExtract: ['collections'],
       },
       function (err: null, data: Collection[]) {
         return res.status(200).json(data)
