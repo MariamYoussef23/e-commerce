@@ -85,7 +85,7 @@ const Home: NextPage = () => {
   const getProductsApi = async () => {
     const response = await axios.get('http://localhost:3000/api/products')
     dispatch(getProducts(response.data))
-    console.log(response.data)
+    
   }
 
   const trendingProducts = products.filter(

@@ -1,7 +1,8 @@
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, ShoppingBagIcon } from '@heroicons/react/outline'
 import { classNames } from 'lib'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+import { useAppSelector } from 'redux/hooks'
 import Drawer from './drawer'
 import ShoppingCartDrawer from './shoppingCartDrawer'
 const navigation = {
@@ -85,7 +86,15 @@ const navigation = {
 function Header() {
   const [open, setOpen] = useState(false)
   const [openShoppingCart, setOpenShoppingCart] = useState(false)
-
+  const cart = useAppSelector((state) => state.cart.cart)
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    let sum = 0
+    cart.map((product) => {
+      sum = sum + +product.quantity!
+    })
+    setCount(sum)
+  }, [cart])
   return (
     <>
       <Drawer open={open} setOpen={setOpen} />
@@ -210,8 +219,6 @@ function Header() {
                           )}
                         </Popover>
                       ))}
-
-
                     </div>
                   </Popover.Group>
                 </div>
@@ -251,7 +258,7 @@ function Header() {
                           aria-hidden="true"
                         />
                         <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                          0
+                          {count}
                         </span>
                         <span className="sr-only">items in cart, view bag</span>
                       </a>

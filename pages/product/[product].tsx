@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks'
 const product = {
   id: '1',
   name: 'Basic Tee 6-Pack',
-  price: '$192',
+  price: '192',
   href: '#',
   images: [
     {

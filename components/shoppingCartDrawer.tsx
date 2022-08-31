@@ -1,11 +1,11 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { CartItem, Product } from 'types'
 import Dropdown from './dropdown'
-import { updateCart} from '../redux/cartSlice'
+import { removeFromCart, updateCart } from '../redux/cartSlice'
 
 // const cart: CartItem[] = [
 //   {
@@ -45,7 +45,17 @@ type props = {
 
 export default function ShoppingCartDrawer({ open, setOpen }: props) {
   const dispatch = useAppDispatch()
-  const cart = useAppSelector((state)=> state.cart.cart)
+  const cart = useAppSelector((state) => state.cart.cart)
+  const [total, setTotal] = useState(0)
+  console.log(cart)
+  useEffect(() => {
+    let sum = 0
+    cart.map((product) => {
+      sum = sum + +product.quantity! * +product.price
+    })
+    setTotal(sum)
+    
+  }, [cart])
   console.log(cart)
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -119,7 +129,7 @@ export default function ShoppingCartDrawer({ open, setOpen }: props) {
                                           {product.name}{' '}
                                         </a>
                                       </h3>
-                                      <p className="ml-4">{product.price}</p>
+                                      <p className="ml-4">${product.price}</p>
                                     </div>
                                     <p className="mt-1 text-sm text-gray-500">
                                       {product.color}
@@ -129,8 +139,12 @@ export default function ShoppingCartDrawer({ open, setOpen }: props) {
                                     <p className="text-gray-500">
                                       <Dropdown
                                         onChangeDropdown={(quantity) => {
-                                          dispatch(updateCart({id:product.id!, quantity: +quantity}))
-                                        
+                                          dispatch(
+                                            updateCart({
+                                              id: product.id!,
+                                              quantity: +quantity,
+                                            })
+                                          )
                                         }}
                                         values={Array.from(
                                           Array(+product.availableQty!),
@@ -144,6 +158,7 @@ export default function ShoppingCartDrawer({ open, setOpen }: props) {
                                       <button
                                         type="button"
                                         className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        onClick={()=>dispatch(removeFromCart(product.id!))}
                                       >
                                         Remove
                                       </button>
@@ -160,7 +175,7 @@ export default function ShoppingCartDrawer({ open, setOpen }: props) {
                     <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>${total}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.
