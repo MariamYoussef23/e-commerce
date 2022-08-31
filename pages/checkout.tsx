@@ -525,7 +525,7 @@ export default function Example() {
                                 Quantity
                               </label>
                               <Dropdown
-                                onChange={(value) => {
+                                onChangeDropdown={(value) => {
                                   console.log('hello world' + value)
                                 }}
                                 values={Array.from(

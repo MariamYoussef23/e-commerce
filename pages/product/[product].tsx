@@ -6,7 +6,7 @@ import { addToCart } from 'redux/cartSlice'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 
 const product = {
-  id: 1,
+  id: '1',
   name: 'Basic Tee 6-Pack',
   price: '$192',
   href: '#',
@@ -34,7 +34,9 @@ const product = {
     'Hand cut and sewn locally, Dyed with our proprietary colors, Pre-washed & pre-shrunk, Ultra-soft 100% cotton',
   details:
     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-}
+  availableQty: '5'
+  }
+   
 const reviews = {
   href: '#',
   average: 4,
@@ -161,6 +163,7 @@ export default function ProductPage() {
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 onClick={() => {
                   dispatch(addToCart({...product, quantity: 1}))
+                  console.log(product)
                 }}
               >
                 Add to bag

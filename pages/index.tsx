@@ -223,8 +223,8 @@ const Home: NextPage = () => {
                   <div key={product.id} className="group relative">
                     <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
                       <img
-                        src={product.images[0].src}
-                        alt={product.images[0].alt}
+                        src={product.images![0].src}
+                        alt={product.images![0].alt}
                         className="h-full w-full object-cover object-center"
                       />
                     </div>

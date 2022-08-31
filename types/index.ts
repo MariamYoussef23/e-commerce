@@ -1,15 +1,17 @@
 export interface Product {
-  id?: number
+  id?: string
   name: string
   href: string
   color?: string
   price: string
-  availableQty?: number
+  availableQty?: string
   trending?: string
-  images: Image[]
+  imageSrc?: string
+  imageAlt?: string
+  images?: Image[]
 }
 export interface Image {
-  id?: number
+  id?: string
   src: string
   alt: string
   productId?: number
@@ -19,7 +21,7 @@ export interface CartItem extends Product {
 }
 
 export interface Collection {
-  id:number
+  id:string
   name: string
   imageSrc: string
   imageAlt: string

@@ -9,7 +9,7 @@ const navigation: Navigation = {
       name: 'Women',
       featured: [
         {
-          id: 1,
+          id: '1',
           name: 'New Arrivals',
           href: '#',
           imageSrc:
@@ -18,7 +18,7 @@ const navigation: Navigation = {
             'Models sitting back to back, wearing Basic Tee in indigo and bone.',
           color: 'Salmon',
           price: '$90.00',
-          availableQty: 4,
+          availableQty: '4',
         },
         {
           name: 'Basic Tees',
@@ -29,8 +29,8 @@ const navigation: Navigation = {
             'Close up of Basic Tee fall bundle with off-white, ochre, olive, and indigo tees.',
           color: 'Salmon',
           price: '$90.00',
-          availableQty: 4,
-          id: 2,
+          availableQty: '4',
+          id: '2',
         },
       ],
     },
@@ -46,8 +46,8 @@ const navigation: Navigation = {
             'Hats and sweaters on wood shelves next to various colors of t-shirts on hangers.',
           color: 'Salmon',
           price: '$90.00',
-          availableQty: 4,
-          id: 2,
+          availableQty: '4',
+          id: '2',
         },
         {
           name: 'Basic Tees',
@@ -57,8 +57,8 @@ const navigation: Navigation = {
           imageAlt: 'Model wearing light heather indigo t-shirt.',
           color: 'Salmon',
           price: '$90.00',
-          availableQty: 4,
-          id: 3,
+          availableQty: '4',
+          id: '3',
         },
         {
           name: 'Accessories',
@@ -69,8 +69,8 @@ const navigation: Navigation = {
             'Grey 6-panel baseball hat with indigo brim, indigo mountain graphic on front, and light heather indigo body.',
           color: 'Salmon',
           price: '$90.00',
-          availableQty: 4,
-          id: 5,
+          availableQty: '4',
+          id: '5',
         },
         {
           name: 'Carry',
@@ -81,8 +81,8 @@ const navigation: Navigation = {
             'Model putting folded cash into slim card holder olive leather wallet with hand stitching.',
           color: 'Salmon',
           price: '$90.00',
-          availableQty: 4,
-          id: 8,
+          availableQty: '4',
+          id: '8',
         },
       ],
     },
