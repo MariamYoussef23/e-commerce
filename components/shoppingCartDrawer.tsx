@@ -1,11 +1,13 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
-import { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import { CartItem, Product } from 'types'
 import Dropdown from './dropdown'
 import { removeFromCart, updateCart } from '../redux/cartSlice'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 // const cart: CartItem[] = [
 //   {
@@ -44,19 +46,17 @@ type props = {
 }
 
 export default function ShoppingCartDrawer({ open, setOpen }: props) {
+  const router = useRouter()
   const dispatch = useAppDispatch()
   const cart = useAppSelector((state) => state.cart.cart)
   const [total, setTotal] = useState(0)
-  console.log(cart)
   useEffect(() => {
     let sum = 0
     cart.map((product) => {
       sum = sum + +product.quantity! * +product.price
     })
     setTotal(sum)
-    
   }, [cart])
-  console.log(cart)
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -158,7 +158,9 @@ export default function ShoppingCartDrawer({ open, setOpen }: props) {
                                       <button
                                         type="button"
                                         className="font-medium text-indigo-600 hover:text-indigo-500"
-                                        onClick={()=>dispatch(removeFromCart(product.id!))}
+                                        onClick={() =>
+                                          dispatch(removeFromCart(product.id!))
+                                        }
                                       >
                                         Remove
                                       </button>
@@ -181,12 +183,12 @@ export default function ShoppingCartDrawer({ open, setOpen }: props) {
                         Shipping and taxes calculated at checkout.
                       </p>
                       <div className="mt-6">
-                        <a
-                          href="#"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                        >
-                          Checkout
-                        </a>
+                        <Link href="/checkout">
+                          <a className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+                            
+                            Checkout
+                          </a>
+                        </Link>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
@@ -194,7 +196,10 @@ export default function ShoppingCartDrawer({ open, setOpen }: props) {
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setOpen(false)}
+                            onClick={() => {
+                              router.push('/')
+                              setOpen(false)
+                            }}
                           >
                             Continue Shopping
                             <span aria-hidden="true"> &rarr;</span>

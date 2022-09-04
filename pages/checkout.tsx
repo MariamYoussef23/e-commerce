@@ -4,6 +4,7 @@ import Dropdown from 'components/dropdown'
 import Layout from 'components/layout'
 import { classNames } from 'lib'
 import { useState } from 'react'
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
 
 const products = [
   {
@@ -52,6 +53,9 @@ export default function Example() {
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
     deliveryMethods[0]
   )
+  const cart = useAppSelector((state)=> state.cart.cart)
+  const dispatch= useAppDispatch()
+  
 
   return (
     <Layout>

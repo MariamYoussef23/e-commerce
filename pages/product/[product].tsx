@@ -84,7 +84,7 @@ export default function ProductPage() {
 
   const dispatch = useAppDispatch()
   const cart = useAppSelector((state) => state.cart.cart)
-  console.log(cart)
+  
 
   return (
     <Layout>
@@ -134,7 +134,7 @@ export default function ProductPage() {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl text-gray-900">{product.price}</p>
+            <p className="text-3xl text-gray-900">${product.price}</p>
 
             {/* Reviews */}
             <div className="mt-6">
@@ -163,7 +163,6 @@ export default function ProductPage() {
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 onClick={() => {
                   dispatch(addToCart({...product, quantity: 1}))
-                  console.log(product)
                 }}
               >
                 Add to bag

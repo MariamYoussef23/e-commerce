@@ -19,9 +19,9 @@ function Dropdown({ values, defaultValue, onChangeDropdown }: props) {
     >
       {values.map((i: string | number) => {
         if (+i  === +defaultValue! ) {
-          return <option value={i} selected>{i}</option>
+          return <option key={Math.random()} value={i} selected>{i}</option>
         } else {
-          return <option value={i}>{i}</option>
+          return <option key={Math.random()} value={i}>{i}</option>
         }
       })}
     </select>
