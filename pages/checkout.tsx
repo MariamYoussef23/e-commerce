@@ -6,33 +6,33 @@ import { classNames } from 'lib'
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 
-const products = [
-  {
-    id: 1,
-    title: 'Basic Tee',
-    href: '#',
-    price: '$32.00',
-    color: 'Black',
-    size: 'Large',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    availableQty: 10,
-  },
-  {
-    id: 2,
-    title: 'Emad Tee',
-    href: '#',
-    price: '$32.00',
-    color: 'Black',
-    size: 'Large',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    availableQty: 6,
-  },
-  // More products...
-]
+// const products = [
+//   {
+//     id: 1,
+//     title: 'Basic Tee',
+//     href: '#',
+//     price: '$32.00',
+//     color: 'Black',
+//     size: 'Large',
+//     imageSrc:
+//       'https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg',
+//     imageAlt: "Front of men's Basic Tee in black.",
+//     availableQty: 10,
+//   },
+//   {
+//     id: 2,
+//     title: 'Emad Tee',
+//     href: '#',
+//     price: '$32.00',
+//     color: 'Black',
+//     size: 'Large',
+//     imageSrc:
+//       'https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg',
+//     imageAlt: "Front of men's Basic Tee in black.",
+//     availableQty: 6,
+//   },
+//   // More products...
+// ]
 const deliveryMethods = [
   {
     id: 1,
@@ -53,7 +53,7 @@ export default function Example() {
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
     deliveryMethods[0]
   )
-  const cart = useAppSelector((state)=> state.cart.cart)
+  const products = useAppSelector((state)=> state.cart.cart)
   const dispatch= useAppDispatch()
   
 
@@ -494,15 +494,15 @@ export default function Example() {
                                   href={product.href}
                                   className="font-medium text-gray-700 hover:text-gray-800"
                                 >
-                                  {product.title}
+                                  {product.name}
                                 </a>
                               </h4>
                               <p className="mt-1 text-sm text-gray-500">
                                 {product.color}
                               </p>
-                              <p className="mt-1 text-sm text-gray-500">
+                              {/* <p className="mt-1 text-sm text-gray-500">
                                 {product.size}
-                              </p>
+                              </p> */}
                             </div>
 
                             <div className="ml-4 flow-root flex-shrink-0">

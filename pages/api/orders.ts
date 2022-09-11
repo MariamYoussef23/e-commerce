@@ -46,17 +46,34 @@ export default async function handler(
         country,
       })
       const orderLine = doc.sheetsByTitle['orderLines']
-      const products = doc.sheetsByTitle['products']
-      console.log(products)
+      const products = await extractSheets(
+        {
+          spreadsheetKey: process.env.SHEET_ID,
+          credentials: credentials,
+          sheetsToExtract: ['products'],
+        },
+        function (err: null, data: AppStateType) {
+          return data.products
+        }
+      )
+      console.log(products.products)
       for (let i = 0; i < orderLines.length; i++) {
-        await orderLine.addRow({
-          quantity: orderLines[i].quantity,
-          orderId: id,
-          productId: orderLines[i].productId,
-        })
+        const product = products.products.find(
+          (product: Product) => product.id == orderLines[i].productId
+        )
+        if (!product) {
+          return res.status(404).json({
+            message: 'Product not found, please enter a valid product',
+          })
+        } else {
+          await orderLine.addRow({
+            quantity: orderLines[i].quantity,
+            orderId: id,
+            productId: orderLines[i].productId,
+          })
+          res.status(200).json({ message: 'success ' })
+        }
       }
-
-      res.status(200).json({ message: 'success ' })
     } catch (error) {
       return console.log(error)
     }
