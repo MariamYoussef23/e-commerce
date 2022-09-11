@@ -4,6 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { AppStateType, Product, Image } from 'types'
 import { getImageSize } from 'next/dist/server/image-optimizer'
 import { useAppSelector } from 'redux/hooks'
+import { v4 as uuidv4 } from 'uuid'
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,21 +21,41 @@ export default async function handler(
         private_key: credentials.private_key,
       })
       await doc.loadInfo()
-      const { email, firstName, lastName, company, address, addressDetails, city, country, orderLines } = req.body
+      const {
+        email,
+        firstName,
+        lastName,
+        company,
+        address,
+        addressDetails,
+        city,
+        country,
+        orderLines,
+      } = req.body
       const orders = doc.sheetsByTitle['orders']
+      const id = uuidv4()
       await orders.addRow({
-        email, firstName, lastName, company, address, addressDetails, city, country
+        id,
+        email,
+        firstName,
+        lastName,
+        company,
+        address,
+        addressDetails,
+        city,
+        country,
       })
       const orderLine = doc.sheetsByTitle['orderLines']
-     
-      
-    
-      
-    //   for (let i = 0; i < orderLines.length; i++){
-          
-    //   }
-      
-      
+      const products = doc.sheetsByTitle['products']
+      console.log(products)
+      for (let i = 0; i < orderLines.length; i++) {
+        await orderLine.addRow({
+          quantity: orderLines[i].quantity,
+          orderId: id,
+          productId: orderLines[i].productId,
+        })
+      }
+
       res.status(200).json({ message: 'success ' })
     } catch (error) {
       return console.log(error)

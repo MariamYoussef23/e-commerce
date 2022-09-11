@@ -4,6 +4,8 @@ import { classNames } from 'lib'
 import { useState } from 'react'
 import { addToCart } from 'redux/cartSlice'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import Head from "next/head";
+import { useRouter } from 'next/router'
 
 const product = {
   id: '1',
@@ -87,6 +89,7 @@ export default function ProductPage() {
   
 
   return (
+    <div>
     <Layout>
       <main className="pt-10 sm:pt-8 md:pt-0">
         {/* Image gallery */}
@@ -269,5 +272,6 @@ export default function ProductPage() {
         </div>
       </main>
     </Layout>
+    </div>
   )
 }

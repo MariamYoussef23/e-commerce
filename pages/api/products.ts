@@ -20,7 +20,7 @@ export default async function handler(
           sheetsToExtract: ['products', 'images'],
         },
         function (err: null, data: AppStateType) {
-          const products = data.products.map((product: Product) => {
+            const products = data.products.map((product: Product) => {
             const images = data.images.filter(
               (image: Image) => image.productId === product.id
             )
